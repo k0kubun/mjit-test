@@ -62,4 +62,5 @@ before_script:
   - "make -s $JOBS && make install"
 
 script:
+  - "git show"
   - "make test-all TESTOPTS='-q --color=never --job-status=normal' RUN_OPTS='--disable-gems --jit-wait --jit-min-calls=5' RUBY_FORCE_TEST_JIT=1"
