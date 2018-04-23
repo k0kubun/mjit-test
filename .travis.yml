@@ -63,4 +63,4 @@ before_script:
   - "git log -n1"
 
 script:
-  - "make $JOBS test-all TESTOPTS='--color=never' RUN_OPTS='--disable-gems --jit-wait --jit-min-calls=5' RUBY_FORCE_TEST_JIT=1"
+  - "make test-all TESTOPTS='--color=never' RUN_OPTS='--disable-gems --jit-wait --jit-verbose=1 --jit-min-calls=5' RUBY_FORCE_TEST_JIT=1"
