@@ -32,8 +32,7 @@ before_install:
   - "JOBS=-j`nproc`"
 
 before_script:
-  #- "rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby ."
-  - "rm -rf .git .travis.yml * && git clone https://github.com/ruby/ruby . && git reset --hard 4cae5353c03009beb1e0a1619422072773580609"
+  - "rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby ."
 
   - "echo JOBS=$JOBS"
   - "uname -a"
