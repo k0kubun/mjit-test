@@ -5,7 +5,7 @@ build:
   steps:
     - script:
         name: checkout again
-        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && git show
+        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && git log -n1
     - script:
         name: install tzdata
         code: apt-get update && apt-get install tzdata
