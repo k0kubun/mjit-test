@@ -30,11 +30,11 @@ build:
     - script:
         name: make test-spec
         code: |
-          sudo -u ruby -E -- bash -c "make test-spec RUN_OPTS='--disable-gems' RUBYOPT='--disable-gems'"
+          sudo -u test -E -- bash -c "make test-spec RUN_OPTS='--disable-gems' RUBYOPT='--disable-gems'"
     - script:
         name: make test
         code: |
-          sudo -u ruby bash -c "make test RUN_OPTS='--disable-gems'"
+          sudo -u test -E -- bash -c "make test RUN_OPTS='--disable-gems'"
     # - script:
     #     name: make test-all (JIT)
     #     code: make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems --jit-wait --jit-warnings' RUBY_FORCE_TEST_JIT=1
