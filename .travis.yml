@@ -1,0 +1,8 @@
+language: c
+dist: trusty
+branches:
+  only:
+    - travis
+sudo: false
+script:
+  - 'true'
