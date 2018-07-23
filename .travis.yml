@@ -9,4 +9,7 @@ before_install:
 script:
   - mkdir -p ~/.ssh && mv mjit-test ~/.ssh/id_rsa && mv ssh_config ~/.ssh/config && chmod 600 ~/.ssh/* && chmod 700 ~/.ssh
   - git clone git@github.com:k0kubun/mjit-test
-  - cd mjit-test && git commit --allow-empty -m "Build: $(date) (committed by travis branch)" && git push origin master
+  - |
+    cd mjit-test
+    git commit --allow-empty -m "Build: $(date) (committed by travis branch)"
+    git push origin master
