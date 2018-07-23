@@ -19,6 +19,10 @@
 language: c
 dist: trusty
 
+branches:
+  only:
+    - master
+
 sudo: false
 
 compiler:
