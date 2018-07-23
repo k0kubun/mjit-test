@@ -1,4 +1,6 @@
 box: k0kubun/ruby:2.6.0-preview2
+no-response-timeout: 30
+command-timeout: 60
 build:
   steps:
     - script:
