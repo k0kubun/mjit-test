@@ -1,4 +1,4 @@
-box: ruby
+box: k0kubun/ruby-build
 build:
   steps:
     - script:
