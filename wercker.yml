@@ -10,7 +10,7 @@ build:
         name: configure
         code: autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix
     - script:
-        name: make install
+        name: make all install
         code: make -j$(nproc) all install
     - script:
         name: make test-all (JIT)
