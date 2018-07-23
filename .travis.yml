@@ -11,5 +11,7 @@ script:
   - git clone git@github.com:k0kubun/mjit-test
   - |
     cd mjit-test
-    git commit --allow-empty -m "Build: $(date) (committed by travis branch)"
+    git commit --allow-empty -m "Build: $(date)
+
+    committed by travis branch"
     git push origin master
