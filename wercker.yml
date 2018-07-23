@@ -10,3 +10,12 @@ build:
     - script:
         name: make install
         code: make -j$(nproc) all install
+    - script:
+        name: make test-all (JIT)
+        code: make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems --jit-wait --jit-warnings' RUBY_FORCE_TEST_JIT=1
+    - script:
+        name: make test-spec (JIT)
+        code: make test-spec RUN_OPTS='--disable-gems --jit-wait --jit-warnings' RUBYOPT='--disable-gems --jit-wait --jit-warnings'
+    - script:
+        name: make test (JIT)
+        code: make test RUN_OPTS='--disable-gems --jit-wait --jit-warnings'
