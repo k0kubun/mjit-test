@@ -10,6 +10,9 @@ build:
         name: install tzdata
         code: apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
     - script:
+        name: workaround ipv6 localhost
+        code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
+    - script:
         name: configure
         code: autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix
     - script:
