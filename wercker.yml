@@ -8,7 +8,7 @@ build:
         code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && git log -n1
     - script:
         name: install tzdata
-        code: apt-get update && apt-get install tzdata
+        code: apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
     - script:
         name: workaround ipv6 localhost
         code: cat /etc/hosts | grep -v "^::1" > /tmp/hosts && mv /tmp/hosts /etc/hosts
