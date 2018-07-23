@@ -14,19 +14,19 @@ build:
         code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && git log -n1
     - script:
         name: create non-root user
-        code: useradd ruby && chown -R ruby:ruby .
+        code: useradd test && chown -R test:test .
     - script:
         name: configure
-        code: sudo -u ruby bash -c "sudo autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix"
+        code: sudo -u test -E -- bash -c "sudo autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix"
     - script:
         name: make all install
-        code: sudo -u ruby bash -c "make -j$(nproc) all install"
+        code: sudo -u test -E -- bash -c "make -j$(nproc) all install"
     - script:
         name: make test-all
-        code: sudo -u ruby bash -c "make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems' RUBY_FORCE_TEST_JIT=1"
+        code: sudo -u test -E -- bash -c "make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems' RUBY_FORCE_TEST_JIT=1"
     - script:
         name: make test-spec
-        code: sudo -u ruby bash -c "make test-spec RUN_OPTS='--disable-gems' RUBYOPT='--disable-gems'"
+        code: sudo -u ruby -E -- bash -c "make test-spec RUN_OPTS='--disable-gems' RUBYOPT='--disable-gems'"
     - script:
         name: make test
         code: sudo -u ruby bash -c "make test RUN_OPTS='--disable-gems'"
