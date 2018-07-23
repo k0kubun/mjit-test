@@ -1,4 +1,4 @@
-box: k0kubun/ruby-build
+box: k0kubun/ruby:2.6.0-preview2
 build:
   steps:
     - script:
