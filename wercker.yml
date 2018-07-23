@@ -5,25 +5,28 @@ build:
   steps:
     - script:
         name: workaround ipv6 localhost
-        code: sudo ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
+        code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
     - script:
         name: checkout again
-        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && git log -n1
+        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
+    - script:
+        name: show last commit
+        code: git log -n1
     - script:
         name: configure
-        code: autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix
+        code: /usr/bin/sudo -i -u test -- bash -c 'autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix'
     - script:
         name: make all install
-        code: make -j$(nproc) all install
+        code: /usr/bin/sudo -i -u test -- bash -c 'make -j$(nproc) all install'
     - script:
         name: make test-all
-        code: make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems' RUBY_FORCE_TEST_JIT=1
+        code: /usr/bin/sudo -i -u test -- bash -c 'make test-all TESTOPTS="--color=never --job-status=normal" RUN_OPTS="--disable-gems" RUBY_FORCE_TEST_JIT=1'
     - script:
         name: make test-spec
-        code: make test-spec RUN_OPTS='--disable-gems' RUBYOPT='--disable-gems'
+        code: /usr/bin/sudo -i -u test -- bash -c 'make test-spec RUN_OPTS="--disable-gems" RUBYOPT="--disable-gems"'
     - script:
         name: make test
-        code: make test RUN_OPTS='--disable-gems'
+        code: /usr/bin/sudo -i -u test -- bash -c 'make test RUN_OPTS="--disable-gems"'
     # - script:
     #     name: make test-all (JIT)
     #     code: make test-all TESTOPTS='--color=never --job-status=normal' RUN_OPTS='--disable-gems --jit-wait --jit-warnings' RUBY_FORCE_TEST_JIT=1
