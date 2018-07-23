@@ -7,5 +7,6 @@ sudo: false
 before_install:
   - openssl aes-256-cbc -K $encrypted_a0bdb649edaa_key -iv $encrypted_a0bdb649edaa_iv -in mjit-test.enc -out mjit-test -d
 script:
-  - mkdir -p ~/.ssh && mv mjit-test ~/.ssh/id_rsa && chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_rsa
-  - ssh -T git@github.com:k0kubun/mjit-test
+  - mkdir -p ~/.ssh && mv mjit-test ~/.ssh/id_rsa && mv ssh_config ~/.ssh/config && chmod 600 ~/.ssh/* && chmod 700 ~/.ssh
+  - git clone git@github.com:k0kubun/mjit-test
+  - cd mjit-test && git commit --allow-empty -m "Build: $(date) (committed by travis branch)" && git push origin master
