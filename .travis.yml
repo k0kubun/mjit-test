@@ -4,5 +4,7 @@ branches:
   only:
     - travis
 sudo: false
+before_install:
+  - openssl aes-256-cbc -K $encrypted_a0bdb649edaa_key -iv $encrypted_a0bdb649edaa_iv -in mjit-test.enc -out mjit-test -d
 script:
-  - 'true'
+  - find .
