@@ -35,5 +35,5 @@ build:
       webhook_url: $SLACK_WEBHOOK_URL
       channel: alerts
       username: mjit-test
-      # notify_on: "failed"
+      notify_on: "failed"
       branches: ^master$
