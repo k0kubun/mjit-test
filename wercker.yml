@@ -31,11 +31,9 @@ build:
     #     name: make test-spec (JIT)
     #     code: /usr/bin/sudo -H -u test -- bash -c 'make test-spec RUN_OPTS="--disable-gems --jit-wait --jit-warnings"'
   after-steps:
-    # - install-packages:
-    #     packages: ruby
     - wantedly/pretty-slack-notify:
       webhook_url: $SLACK_WEBHOOK_URL
-      # channel: alerts
-      # username: mjit-test
+      channel: alerts
+      username: mjit-test
       # notify_on: "failed"
-      # branches: ^master$
+      branches: ^master$
