@@ -4,26 +4,38 @@ command-timeout: 60
 build:
   steps:
     - script:
-        name: workaround ipv6 localhost
-        code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
-    - script:
-        name: checkout again
-        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
-    - script:
-        name: show last commit
-        code: git log -n1
-    - script:
-        name: configure
-        code: /usr/bin/sudo -H -u test -- bash -c 'autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix'
-    - script:
-        name: make all install
-        code: /usr/bin/sudo -H -u test -- bash -c 'make -j$(nproc) all install'
-    - script:
-        name: make test (JIT)
-        code: /usr/bin/sudo -H -u test -- bash -c 'make test RUN_OPTS="--disable-gems --jit-wait --jit-warnings"'
-    - script:
-        name: make test-all (JIT)
-        code: /usr/bin/sudo -H -u test -- bash -c 'make test-all TESTOPTS="--color=never --job-status=normal" RUN_OPTS="--disable-gems --jit-wait --jit-warnings" RUBY_FORCE_TEST_JIT=1'
-    - script:
-        name: make test-spec (JIT)
-        code: /usr/bin/sudo -H -u test -- bash -c 'make test-spec RUN_OPTS="--disable-gems --jit-wait --jit-warnings"'
+        name: test slack
+        code: 'false'
+    # - script:
+    #     name: workaround ipv6 localhost
+    #     code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
+    # - script:
+    #     name: checkout again
+    #     code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
+    # - script:
+    #     name: show last commit
+    #     code: git log -n1
+    # - script:
+    #     name: configure
+    #     code: /usr/bin/sudo -H -u test -- bash -c 'autoconf && ./configure --disable-install-doc --prefix=/tmp/ruby-prefix'
+    # - script:
+    #     name: make all install
+    #     code: /usr/bin/sudo -H -u test -- bash -c 'make -j$(nproc) all install'
+    # - script:
+    #     name: make test (JIT)
+    #     code: /usr/bin/sudo -H -u test -- bash -c 'make test RUN_OPTS="--disable-gems --jit-wait --jit-warnings"'
+    # - script:
+    #     name: make test-all (JIT)
+    #     code: /usr/bin/sudo -H -u test -- bash -c 'make test-all TESTOPTS="--color=never --job-status=normal" RUN_OPTS="--disable-gems --jit-wait --jit-warnings" RUBY_FORCE_TEST_JIT=1'
+    # - script:
+    #     name: make test-spec (JIT)
+    #     code: /usr/bin/sudo -H -u test -- bash -c 'make test-spec RUN_OPTS="--disable-gems --jit-wait --jit-warnings"'
+  after-steps:
+    # - install-packages:
+    #     packages: ruby
+    - wantedly/pretty-slack-notify:
+      webhook_url: $SLACK_WEBHOOK_URL
+      # channel: alerts
+      # username: mjit-test
+      # notify_on: "failed"
+      # branches: ^master$
