@@ -5,7 +5,7 @@ build:
   steps:
     - script:
         name: test slack
-        code: 'false'
+        code: 'true'
     # - script:
     #     name: workaround ipv6 localhost
     #     code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
