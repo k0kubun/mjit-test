@@ -6,9 +6,12 @@ build:
     - script:
         name: workaround ipv6 localhost
         code: ruby -e "hosts = File.read('/etc/hosts').sub(/^::1\s*localhost.*$/, ''); File.write('/etc/hosts', hosts)"
+    # - script:
+    #     name: checkout again
+    #     code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
     - script:
         name: checkout again
-        code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
+        code: rm -rf .git .travis.yml * && git clone https://github.com/ruby/ruby . && git reset --hard 490fbc4c858e1b37f338c59366a84cc228c53c3e && chown -R test:test .
     - script:
         name: show last commit
         code: git log -n1
