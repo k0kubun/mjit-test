@@ -15,7 +15,7 @@ build:
         code: rm -rf .git .travis.yml * && git clone https://github.com/ruby/ruby .
     - script:
         name: checkout
-        code: git reset --hard 1e769ce6eddd0275afa4cecdd7b569f21fd65667
+        code: git reset --hard 291afc96bd4909fc3504df196c4370fe745cb9ee
     - script:
         name: chown
         code: chown -R test:test .
