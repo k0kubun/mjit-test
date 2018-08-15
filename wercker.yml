@@ -9,9 +9,17 @@ build:
     # - script:
     #     name: checkout again
     #     code: rm -rf .git .travis.yml * && git clone --depth=1 https://github.com/ruby/ruby . && chown -R test:test .
+
     - script:
-        name: checkout again
-        code: rm -rf .git .travis.yml * && git clone https://github.com/ruby/ruby . && git reset --hard 6dfaccf20da5deefe66221df8b4d95c68dfbe233 && chown -R test:test .
+        name: clone again
+        code: rm -rf .git .travis.yml * && git clone https://github.com/ruby/ruby .
+    - script:
+        name: checkout
+        code: git reset --hard 4d2e0fffb08f0418fa6995be2e15aad7ee11b048
+    - script:
+        name: chown
+        code: chown -R test:test .
+
     - script:
         name: show last commit
         code: git log -n1
